@@ -6,9 +6,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /build
-COPY src/WosGeatOnline.Api/WosGeatOnline.Api.csproj .
+COPY WosGeatOnline.Api.csproj .
 RUN dotnet restore
-COPY src/WosGeatOnline.Api/ .
+COPY . .
 RUN dotnet build --no-restore -c Release -o /app
 
 FROM build AS publish

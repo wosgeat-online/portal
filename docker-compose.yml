@@ -3,5 +3,5 @@ services:
   wosgeat.api:
     image: wosgeatapi:${TAG:-latest}
     build:
-      context: .
-      dockerfile: src/WosGeatOnline.Api/Dockerfile
+      context: src/WosGeatOnline.Api/
+      dockerfile: Dockerfile
