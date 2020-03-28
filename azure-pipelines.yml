@@ -38,22 +38,22 @@ stages:
         tags: |
           $(tag)
 
-stages:
-  - stage: DeployProd
-    displayName: Deploy on prod
-    jobs:  
-    - deployment: Deploy
-      displayName: Deploy API
-      pool:
-        vmImage: $(vmImageName)
-      environment: 'wosgeatonline-prod'
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - task: AzureWebAppContainer@1
-              displayName: 'Azure Web App on Container Deploy'
-              inputs:
-                azureSubscription: $(azureSubscription)
-                appName: $(appName)
-                containers: $(containerRegistry)/$(imageRepository):$(tag)
+- stage: DeployProd
+  displayName: Deploy on prod
+  dependsOn: Build
+  jobs:  
+  - deployment: Deploy
+    displayName: Deploy API
+    pool:
+      vmImage: $(vmImageName)
+    environment: 'wosgeatonline-prod'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebAppContainer@1
+            displayName: 'Azure Web App on Container Deploy'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(appName)
+              containers: $(containerRegistry)/$(imageRepository):$(tag)
