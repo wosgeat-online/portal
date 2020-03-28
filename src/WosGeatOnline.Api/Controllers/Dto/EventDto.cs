@@ -36,10 +36,6 @@ namespace WosGeatOnline.Api.Controllers
 
         public DateTime TimestampStart { get; set; }
 
-        public bool IsRunning {
-            get {
-                return TimestampStart <= DateTime.Now;
-            }
-        }
+        public string State { get; set; }
     }
 }
