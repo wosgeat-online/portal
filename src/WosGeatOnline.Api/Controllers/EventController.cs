@@ -32,7 +32,7 @@ namespace WosGeatOnline.Api.Controllers
         [HttpGet("/event/{guid}")]
         public EventDto Get(Guid guid)
         {
-            return JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json")).First( e => e.Guid == guid);
+            return JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json")).First( e => e.Id == guid);
         }
     }
 }

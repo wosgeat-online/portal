@@ -5,7 +5,9 @@ namespace WosGeatOnline.Api.Controllers
 {
     public class EventDto
     {
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
+        
+        public string Category { get; set; }
 
         public string Title { get; set; }
 
@@ -25,6 +27,10 @@ namespace WosGeatOnline.Api.Controllers
         }
 
         public string VideoLink { get; set; }
+
+        public string AuthorName { get; set; }
+
+        public string AuthorImage { get; set; }
 
         public int WatchCount { get; set; }
 
