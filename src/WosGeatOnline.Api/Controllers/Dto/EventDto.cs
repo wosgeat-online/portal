@@ -12,19 +12,8 @@ namespace WosGeatOnline.Api.Controllers
         public string Title { get; set; }
 
         public string Description { get; set; }
-        
-        public string ImageName { private get; set; }
 
-        public byte[] Image {
-            get {
-                var path = "resources/" + ImageName;
-                if (!File.Exists(path))
-                {
-                    return null;
-                }
-                return File.ReadAllBytes(path);
-            }
-        }
+        public string Image { get; set; }
 
         public string VideoLink { get; set; }
 
