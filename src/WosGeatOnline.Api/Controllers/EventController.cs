@@ -34,7 +34,7 @@ namespace WosGeatOnline.Api.Controllers
 
             var list = new EventListDto()
             {
-                Events = events
+                Events = events.OrderByDescending(e => e.TimestampStart).Take(20)
             };
             return list;
         }
