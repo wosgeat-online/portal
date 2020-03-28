@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  wosgeat.api:
+    image: wosgeatapi:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/WosGeatOnline.Api/Dockerfile

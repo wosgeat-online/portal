@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  wosgeat.api:
+    environment:
+        ASPNETCORE_ENVIRONMENT: "Development"
+        ASPNETCORE_URLS: "http://0.0.0.0:80"
+    ports:
+      - "5000:80"
+      - "5001:443"
