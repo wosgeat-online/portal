@@ -15,7 +15,7 @@ variables:
   containerRegistry: 'wosgeatonline.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/src/WosGeatOnline.Api/Dockerfile'
   tag: '$(Build.BuildId)'
-  azureSubscription: 'ASP-wosgeatonline-a92e'
+  azureSubscription: 'wosgeat.online'
   appName: wosgeatonline-api
   
   # Agent VM image name
