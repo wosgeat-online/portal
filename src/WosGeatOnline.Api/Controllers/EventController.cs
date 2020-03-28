@@ -20,8 +20,11 @@ namespace WosGeatOnline.Api.Controllers
         }
 
         [HttpGet("/events")]
-        public EventListDto Get([FromQuery(Name = "category")] string category, [FromQuery(Name = "q")] string query)
-        {
+        public EventListDto Get(
+            [FromQuery(Name = "category")] string category,
+            [FromQuery(Name = "q")] string query,
+            [FromQuery(Name = "limit")] int limit  = 20
+        ) {
             var events = JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json"));
             if (!string.IsNullOrEmpty(category))
             {
@@ -34,7 +37,7 @@ namespace WosGeatOnline.Api.Controllers
 
             var list = new EventListDto()
             {
-                Events = events.OrderByDescending(e => e.TimestampStart).Take(20)
+                Events = events.OrderByDescending(e => e.TimestampStart).Take(limit)
             };
             return list;
         }
