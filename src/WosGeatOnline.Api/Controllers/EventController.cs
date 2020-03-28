@@ -20,13 +20,17 @@ namespace WosGeatOnline.Api.Controllers
         }
 
         [HttpGet("/events")]
-        public EventListDto Get([FromQuery(Name = "category")] string category)
+        public EventListDto Get([FromQuery(Name = "category")] string category, [FromQuery(Name = "q")] string query)
         {
             var events = JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json"));
             if (!string.IsNullOrEmpty(category))
             {
                 events = events.Where(e => e.Category == category);
-            }   
+            }
+            if (!string.IsNullOrEmpty(query))
+            {
+                events = events.Where(e => e.Title.Contains(query, StringComparison.OrdinalIgnoreCase) || e.Description.Contains(query, StringComparison.OrdinalIgnoreCase));
+            }
 
             var list = new EventListDto()
             {
@@ -39,6 +43,14 @@ namespace WosGeatOnline.Api.Controllers
         public EventDto Get(Guid guid)
         {
             return JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json")).First( e => e.Id == guid);
+        }
+    }
+
+    public static class StringExtensions
+    {
+        public static bool Contains(this string source, string toCheck, StringComparison comp)
+        {
+            return source?.IndexOf(toCheck, comp) >= 0;
         }
     }
 }
