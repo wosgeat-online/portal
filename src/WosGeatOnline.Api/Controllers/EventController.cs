@@ -20,11 +20,17 @@ namespace WosGeatOnline.Api.Controllers
         }
 
         [HttpGet("/events")]
-        public EventListDto Get()
+        public EventListDto Get([FromQuery(Name = "category")] string category)
         {
+            var events = JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json"));
+            if (!string.IsNullOrEmpty(category))
+            {
+                events = events.Where(e => e.Category == category);
+            }   
+
             var list = new EventListDto()
             {
-                Events = JsonConvert.DeserializeObject<IEnumerable<EventDto>>(System.IO.File.ReadAllText("resources/events.json"))
+                Events = events
             };
             return list;
         }
